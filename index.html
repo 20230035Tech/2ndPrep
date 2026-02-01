@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جدول الدروس</title>
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-attachment: fixed;
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .math-symbol {
+            position: fixed;
+            font-size: 2em;
+            color: rgba(255, 255, 255, 0.25);
+            pointer-events: none;
+            z-index: 0;
+            user-select: none;
+            font-weight: bold;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        th {
+            padding: 15px;
+            text-align: right;
+            border: none;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            text-align: right;
+        }
+        
+        tbody tr {
+            transition: all 0.3s ease;
+        }
+        
+        tbody tr:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%);
+            transform: scale(1.01);
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: rgba(240, 147, 251, 0.05);
+        }
+        
+        tbody tr:nth-child(odd) {
+            background-color: rgba(102, 126, 234, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <h1>جدول الدروس والملخصات والواجبات</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>الدرس</th>
+                <th>الملخص</th>
+                <th>الواجب</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>الدرس الاول</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+<script>
+    const symbols = ['∑', '∫', '∂', '∆', '∇', '≈', '≠', '≡', '∞', '√', '∛', '∜', '∏', '±', '×', '÷', '⊕', '⊖', '⊗', 'π', 'θ', 'φ', 'ψ', 'ω', 'α', 'β', 'γ', 'δ', 'ε', 'ζ', 'η', '∀', '∃', '∈', '∉', '⊂', '⊃', '∪', '∩'];
+    
+    function createRandomSymbols() {
+        const numberOfSymbols = 50;
+        
+        for (let i = 0; i < numberOfSymbols; i++) {
+            const symbol = document.createElement('div');
+            symbol.className = 'math-symbol';
+            
+            // Random symbol from array
+            const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+            symbol.textContent = randomSymbol;
+            
+            // Random position across entire viewport
+            const randomX = Math.random() * window.innerWidth;
+            const randomY = Math.random() * window.innerHeight;
+            
+            // Random rotation
+            const randomRotation = Math.random() * 360;
+            
+            // Random size
+            const randomSize = 1.5 + Math.random() * 2;
+            
+            // Random opacity
+            const randomOpacity = 0.2 + Math.random() * 0.25;
+            
+            symbol.style.left = randomX + 'px';
+            symbol.style.top = randomY + 'px';
+            symbol.style.transform = `rotate(${randomRotation}deg) scale(${randomSize})`;
+            symbol.style.opacity = randomOpacity;
+            
+            // Add floating animation with random delay
+            const delay = Math.random() * 8;
+            symbol.style.animation = `float 8s ease-in-out infinite ${delay}s`;
+            
+            document.body.appendChild(symbol);
+        }
+    }
+    
+    // Create symbols when page loads
+    window.addEventListener('load', createRandomSymbols);
+    
+    // Also create symbols immediately in case load event fires before script
+    createRandomSymbols();
+</script>
